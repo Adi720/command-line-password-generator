@@ -6,6 +6,8 @@
 // we can do the things commander do using process.argv as well!!!
 
 const program = require('commander')
+const log = console.log
+const createPassword = require('./utils/createPassword')
 
 program.version('1.0.0').description('Simple Command Line Password Generator')
 
@@ -24,5 +26,9 @@ program
     .option('-ns --no-symbols', 'remove symbols')
     .parse()
 
+const { length, save, numbers, symbols } = program.opts()
 
-console.log(program.opts());
+// Get generated password
+const generatedPassword = createPassword(length, numbers, symbols)
+
+log(generatedPassword)
