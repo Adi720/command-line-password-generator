@@ -5,9 +5,11 @@
 // }
 // we can do the things commander do using process.argv as well!!!
 
-const program = require('commander')
+import { program } from 'commander'
+import chalk from 'chalk'
+import clipboard from 'clipboardy'
 const log = console.log
-const createPassword = require('./utils/createPassword')
+import createPassword from './utils/createPassword.js'
 
 program.version('1.0.0').description('Simple Command Line Password Generator')
 
@@ -31,4 +33,8 @@ const { length, save, numbers, symbols } = program.opts()
 // Get generated password
 const generatedPassword = createPassword(length, numbers, symbols)
 
-log(generatedPassword)
+// Copy to clipboard
+clipboard.writeSync(generatedPassword)
+
+log(chalk.blue('Generated Password: ') + chalk.bold(generatedPassword))
+log(chalk.yellow('Password copied to clipboard'))
