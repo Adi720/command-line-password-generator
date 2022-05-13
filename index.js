@@ -10,6 +10,7 @@ import chalk from 'chalk'
 import clipboard from 'clipboardy'
 const log = console.log
 import createPassword from './utils/createPassword.js'
+import savePassword from './utils/savePassword.js'
 
 program.version('1.0.0').description('Simple Command Line Password Generator')
 
@@ -32,6 +33,11 @@ const { length, save, numbers, symbols } = program.opts()
 
 // Get generated password
 const generatedPassword = createPassword(length, numbers, symbols)
+
+// Save to file
+if (save) {
+    savePassword(generatedPassword)
+}
 
 // Copy to clipboard
 clipboard.writeSync(generatedPassword)
